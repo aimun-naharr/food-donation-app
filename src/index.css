@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --poppins: "Poppins", sans-serif;
+  --primary: #ff6125;
+  --primary-foreground: #ffffff;
+  --gray: #f7f7f7;
+  --goldenYellow: #f2c14c;
+  --seaGreen: #59bbb7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--poppins);
+  font-weight: 400;
+}
+
+@layer utilities {
+  .border-red {
+    @apply border-2 border-red-300;
+  }
+  .hero_title {
+    @apply md:text-5xl max-w-[500px] font-bold text-4xl;
+  }
+  .flex_between {
+    @apply md:flex-row flex gap-3 flex-col md:items-center md:justify-between md:gap-0 items-center justify-center;
+  }
+  .section_title {
+    @apply bg-gray text-primary w-max px-4 py-2 rounded text-xs;
+  }
+  .section_heading {
+    @apply md:text-4xl max-w-[500px] font-semibold  text-3xl;
+  }
+  .tent-border {
+    border-radius: 200px 200px 5px 5px;
+    -moz-border-radius: 200px 200px 5px 5px;
+    -webkit-border-radius: 200px 200px 5px 5px;
+    border: 0px solid #000000;
+  }
+}
