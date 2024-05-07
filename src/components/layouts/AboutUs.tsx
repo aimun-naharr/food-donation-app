@@ -7,7 +7,7 @@ export default function AboutUs() {
   return (
     <section className="my-20">
       <Container>
-        <div className="flex_between w-full ">
+        <div className="flex_between w-full items-center justify-center">
           {/* descriptioin */}
           <div className="max-w-[500px] w-full flex flex-col gap-4 ">
             <h6 className="section_title">About Us</h6>
@@ -20,8 +20,12 @@ export default function AboutUs() {
             <Button className="bg-primary w-max">Learn More</Button>
           </div>
           {/* image */}
-          <div className="">
-            <div className="w-[320px] tent-border overflow-hidden aspect-square ">
+          <div className="relative ">
+            <div className="absolute -left-[60%] z-[-1] opacity-20">
+              <img src={assets.grid} alt="" />
+            </div>
+
+            <div className="w-[320px] tent-border overflow-hidden aspect-square">
               <img
                 src={assets.kids}
                 alt=""

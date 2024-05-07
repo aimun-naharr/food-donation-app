@@ -25,10 +25,10 @@ body {
     @apply border-2 border-red-300;
   }
   .hero_title {
-    @apply md:text-5xl max-w-[500px] font-bold text-4xl;
+    @apply sm:text-5xl max-w-[500px] font-bold text-4xl;
   }
   .flex_between {
-    @apply md:flex-row flex gap-3 flex-col md:items-center md:justify-between md:gap-0 items-center justify-center;
+    @apply md:flex-row flex gap-3 flex-col md:items-center md:justify-between md:gap-0;
   }
   .section_title {
     @apply bg-gray text-primary w-max px-4 py-2 rounded text-xs;

@@ -35,7 +35,7 @@ export default function HeroSection() {
       <div className="h-20"></div>
       <Container>
         <div className="relative">
-          <div className="absolute top-[18%] md:bottom-0 md:left-0 left-[40%]">
+          <div className="absolute top-[18%] sm:top-[unset] sm:-bottom-0  sm:left-0 left-[40%] opacity-50">
             <img src={assets.dotGrid} alt="" />
           </div>
           {/* hero descriptions */}
@@ -51,7 +51,7 @@ export default function HeroSection() {
           </div>
 
           {/* hero image */}
-          <div className="md:w-4/5 w-full my-24 md:my-0 md:mt-12 relative aspect-[10/12] md:aspect-[16/8]">
+          <div className="md:w-4/5 w-full my-24 md:my-0 md:mt-12 relative aspect-[10/12] sm:aspect-[16/8]">
             <img
               src={assets.HeroImage2}
               alt=""
