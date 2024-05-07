@@ -1,6 +1,5 @@
 import Container from "@/layouts/Container";
 import { assets } from "@/lib/assets";
-import React from "react";
 import { Button } from "../ui/button";
 
 export default function AboutUs() {
@@ -25,7 +24,7 @@ export default function AboutUs() {
               <img src={assets.grid} alt="" />
             </div>
 
-            <div className="w-[320px] tent-border overflow-hidden aspect-square">
+            <div className="max-w-[450px] w-full rounded-md aspect-[16/12] overflow-hidden ">
               <img
                 src={assets.kids}
                 alt=""
