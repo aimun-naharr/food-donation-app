@@ -1,0 +1,18 @@
+:root {
+  --poppins: "Poppins", sans-serif;
+  --primary: #ff6125;
+  --primary-foreground: #ffffff;
+  --gray: #f7f7f7;
+  --goldenYellow: #f2c14c;
+  --seaGreen: #59bbb7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--poppins);
+  font-weight: 400;
+}
