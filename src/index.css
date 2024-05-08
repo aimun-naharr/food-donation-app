@@ -20,6 +20,12 @@ body {
   font-weight: 400;
 }
 
+@layer base {
+  section {
+    @apply my-20 md:my-28;
+  }
+}
+
 @layer utilities {
   .border-red {
     @apply border-2 border-red-300;

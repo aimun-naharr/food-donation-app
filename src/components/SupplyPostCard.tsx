@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRight } from "react-feather";
 
 type TSupplyPost = {
   image: string;
@@ -14,7 +15,17 @@ export default function SupplyPostCard({
   quantity,
 }: TSupplyPost) {
   return (
-    <div className="bg-primary-foreground w-full shadow-xl px-4 py-6 rounded-md">
+    <div className="bg-primary-foreground w-full shadow-xl px-4 py-6 rounded-md relative">
+      <button className="group absolute bottom-0 border border-zinc-100  size-10 right-0 rounded-br-lg text-primary flex items-center justify-center shadow-2xl z-[3] overflow-hidden">
+        <div className="relative  w-full h-full flex items-center justify-center">
+          <ArrowRight
+            size={16}
+            className="z-[2]  relative group-hover:text-primary-foreground transition-color"
+          />
+          <div className="absolute bg-primary z-[1] size-[50px] rounded-full translate-y-[100%] group-hover:translate-y-0 group-hover:rounded-none transition-all duration-500"></div>
+        </div>
+        {/* <div></div> */}
+      </button>
       <div className="rounded-xl overflow-hidden">
         <img src={image} alt="" />
       </div>

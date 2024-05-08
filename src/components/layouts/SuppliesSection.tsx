@@ -5,7 +5,7 @@ import { suppliesArr } from "@/lib/constants";
 
 export default function SuppliesSection() {
   return (
-    <section className="my-20">
+    <section className="">
       <Container>
         <div className="flex w-full items-center justify-center">
           <h6 className="section_title">Supplies</h6>

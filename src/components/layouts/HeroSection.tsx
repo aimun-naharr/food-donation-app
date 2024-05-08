@@ -3,6 +3,7 @@ import Container from "../../layouts/Container";
 import HeroHangingCard from "../HeroHangingCard";
 import { Separator } from "../ui/separator";
 import { cn } from "@/lib/utils";
+import NumberTicker from "../NumberTicker";
 
 type TCountCard = {
   count: number;
@@ -17,13 +18,19 @@ const CountCard = ({
 }: TCountCard) => {
   return (
     <div className="w-[100px] flex-shrink-0">
-      <h1
+      {/* <h1
         className={cn("hero_title", {
           "text-primary": highlightCount,
         })}
       >
         {count}
-      </h1>
+      </h1> */}
+      <NumberTicker
+        value={count}
+        className={cn("hero_title", {
+          "text-primary": highlightCount,
+        })}
+      />
       <p className="text-sm font-light">{description}</p>
     </div>
   );
@@ -32,7 +39,7 @@ const CountCard = ({
 export default function HeroSection() {
   return (
     <section className="">
-      <div className="h-20"></div>
+      {/* <div className="h-20"></div> */}
       <Container>
         <div className="relative">
           <div className="absolute top-[18%] sm:top-[unset] sm:-bottom-0  sm:left-0 left-[40%] opacity-50">

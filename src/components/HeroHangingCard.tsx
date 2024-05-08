@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import Person1 from "../assets/person1.avif";
 import { ArrowDown } from "react-feather";
 import { cn } from "@/lib/utils";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 
 type THeroHangingCardProp = {
   className: string;
@@ -31,12 +37,51 @@ export default function HeroHangingCard({
   linkText,
   iconBgClass,
 }: THeroHangingCardProp) {
+  const ref = useRef<HTMLDivElement>(null);
+  // const ROTATION_RANGE = 10;
+  // const HALF_ROTATION_RANGE = 10 / 2;
+
+  // const x = useMotionValue(0);
+  // const y = useMotionValue(0);
+
+  // const xSpring = useSpring(x);
+  // const ySpring = useSpring(y);
+
+  // const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
+
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   if (!ref.current) return [0, 0];
+
+  //   const rect = ref.current.getBoundingClientRect();
+
+  //   const width = rect.width;
+  //   const height = rect.height;
+
+  //   const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
+  //   const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
+
+  //   const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
+  //   const rY = mouseX / width - HALF_ROTATION_RANGE;
+
+  //   x.set(rX);
+  //   y.set(rY);
+  // };
+
+  // const handleMouseLeave = () => {
+  //   x.set(0);
+  //   y.set(0);
+  // };
+
   return (
-    <div
+    <motion.div
+      ref={ref}
+      // onMouseMove={handleMouseMove}
+      // onMouseLeave={handleMouseLeave}
       className={cn(
-        "w-[150px] md:w-[250px] bg-primary-foreground  absolute  rounded-md shadow-2xl ",
+        "w-[150px] md:w-[250px] bg-primary-foreground  absolute  rounded-md shadow-2xl  ",
         className
       )}
+      // style={{ transform }}
     >
       <div className="relative flex flex-col gap-6 md:gap-8 px-2 py-4 md:px-4 md:py-6">
         <div className="w-full rounded-md aspect-square overflow-hidden ">
@@ -57,6 +102,6 @@ export default function HeroHangingCard({
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

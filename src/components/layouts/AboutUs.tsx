@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 export default function AboutUs() {
   return (
-    <section className="my-20">
+    <section className="">
       <Container>
         <div className="flex_between w-full items-center justify-center">
           {/* descriptioin */}
