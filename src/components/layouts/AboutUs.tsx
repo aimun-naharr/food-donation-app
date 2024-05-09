@@ -1,6 +1,7 @@
 import Container from "@/layouts/Container";
 import { assets } from "@/lib/assets";
 import { Button } from "../ui/button";
+import PrimaryButton from "../PrimaryButton";
 
 export default function AboutUs() {
   return (
@@ -16,7 +17,7 @@ export default function AboutUs() {
               quis facilis tempora, eius sequi officiis asperiores laudantium
               ducimus eaque sunt voluptates incidunt earum optio praesentium
             </p>
-            <Button className="bg-primary w-max">Learn More</Button>
+            <PrimaryButton>Learn More</PrimaryButton>
           </div>
           {/* image */}
           <div className="relative ">

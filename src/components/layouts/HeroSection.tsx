@@ -38,8 +38,7 @@ const CountCard = ({
 
 export default function HeroSection() {
   return (
-    <section className="">
-      {/* <div className="h-20"></div> */}
+    <div className="my-10">
       <Container>
         <div className="relative">
           <div className="absolute top-[18%] sm:top-[unset] sm:-bottom-0  sm:left-0 left-[40%] opacity-50">
@@ -96,6 +95,6 @@ export default function HeroSection() {
           </div>
         </div>
       </Container>
-    </section>
+    </div>
   );
 }
