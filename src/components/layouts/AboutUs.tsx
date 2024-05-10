@@ -1,6 +1,5 @@
 import Container from "@/layouts/Container";
 import { assets } from "@/lib/assets";
-import { Button } from "../ui/button";
 import PrimaryButton from "../PrimaryButton";
 
 export default function AboutUs() {

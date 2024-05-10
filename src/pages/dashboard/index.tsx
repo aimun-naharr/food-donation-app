@@ -1,49 +1,59 @@
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { LayoutPanelLeft } from "lucide-react";
-import React, { useState } from "react";
-import { Plus } from "react-feather";
+import { useState } from "react";
+import { Plus, Table } from "react-feather";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const [hovered, setHovered] = useState(false);
-  const activePath = "/dashboard";
+  const { pathname } = useLocation();
+
   const navItems = [
     {
       name: "Dashboard",
       icon: <LayoutPanelLeft size={16} />,
       path: "/dashboard",
     },
-    { name: "Add", icon: <Plus size={16} />, path: "add-supplies" },
+    {
+      name: "All supplies",
+      icon: <Table size={16} />,
+      path: "/dashboard/all-supplies",
+    },
+    {
+      name: "Add supplies",
+      icon: <Plus size={16} />,
+      path: "/dashboard/add-new",
+    },
   ];
   // motion
   return (
     <div
-      className=" h-screen"
+      className="md:w-[250px] h-screen"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <ul className="flex flex-col gap-1 mt-1">
         {navItems.map((nav, i) => {
           return (
-            <li
+            <Link
+              to={nav.path}
               key={i}
               className={cn(
-                "flex gap-2  items-center px-4 py-2 mx-2 rounded flex-shrink-0 text-zinc-700",
+                "flex gap-2  items-center px-1 py-1 md:px-4 md:py-2 mx-2 rounded flex-shrink-0 text-zinc-700 transition-all duration-500",
                 {
-                  "bg-zinc-100": activePath === nav.path,
+                  "bg-zinc-100": pathname === nav.path,
                 }
               )}
             >
               <div
                 className={cn("p-2 rounded-md", {
-                  "bg-primary text-primary-foreground ":
-                    activePath === nav.path,
+                  "bg-primary text-primary-foreground ": pathname === nav.path,
                 })}
               >
                 {nav.icon}
               </div>
-              <span className="text-sm">{nav.name}</span>
-            </li>
+              <span className="text-sm hidden md:block">{nav.name}</span>
+            </Link>
           );
         })}
       </ul>
@@ -54,7 +64,9 @@ export default function Dashboard() {
   return (
     <div className="flex">
       <Sidebar />
-      content
+      <div className="md:p-4 p-1 w-full">
+        <Outlet />
+      </div>
     </div>
   );
 }

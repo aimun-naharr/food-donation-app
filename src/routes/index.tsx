@@ -1,6 +1,8 @@
 import Layout from "@/layouts/Layout";
 import Auth from "@/pages/auth";
 import Dashboard from "@/pages/dashboard";
+import AddNewSupplies from "@/pages/dashboard/add-new";
+import AllSupplies from "@/pages/dashboard/all-supplies";
 import Home from "@/pages/home";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -16,6 +18,16 @@ const routes = [
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path: "all-supplies",
+        element: <AllSupplies />,
+      },
+      {
+        path: "add-new",
+        element: <AddNewSupplies />,
+      },
+    ],
   },
 ];
 

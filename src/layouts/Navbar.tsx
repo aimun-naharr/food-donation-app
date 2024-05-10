@@ -1,10 +1,12 @@
 import Logo from "@/components/Logo";
 
 import PrimaryButton from "@/components/PrimaryButton";
+import { cn } from "@/lib/utils";
 import { Menu } from "react-feather";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const navItems = [
     { name: "All Items", href: "/all-items" },
@@ -30,7 +32,12 @@ export default function Navbar() {
               >
                 <span>{item.name}</span>
                 {/* floating bar */}
-                <div className="w-0 h-1 rounded bottom-0 bg-primary absolute group-hover:w-[15px] transition-all left-1/2 -translate-x-1/2 duration-300"></div>
+                <div
+                  className={cn(
+                    "w-0 h-1 rounded bottom-0 bg-primary absolute group-hover:w-[15px] transition-all left-1/2 -translate-x-1/2 duration-300",
+                    { "w-[15px]": pathname.includes(item.href) }
+                  )}
+                ></div>
               </Link>
             );
           })}
