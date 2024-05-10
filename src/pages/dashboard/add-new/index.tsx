@@ -1,3 +1,5 @@
+import InputElem from "@/components/InputElem";
+import SelectElem from "@/components/SelectElem";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,22 +8,25 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Input } from "@/components/ui/input";
+import React, { useState } from "react";
 
-const InputElem = ({ label, ...props }: { label: string }) => {
-  return (
-    <>
-      <div>
-        <label htmlFor="" className="text-sm font-semibold ">
-          {label}
-        </label>
-        <Input placeholder="Title" {...props} />
-      </div>
-    </>
-  );
+const initialFormData = {
+  title: "",
+  description: "",
+  category: "",
+  quantity: 0,
 };
 
 const AddNewSupplies = () => {
+  const [formData, setFormData] = useState(initialFormData);
+  console.log({ formData });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSelectChange = (value: string, name: string) => {
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <div>
       <div>
@@ -38,14 +43,38 @@ const AddNewSupplies = () => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="my-6 grid md:grid-cols-3 gap-4">
-        <InputElem label="Title" placeholder="Title" />
-        <InputElem label="Quantity" type="number" placeholder="Quantity" />
-        <InputElem label="Title" placeholder="Title" />
-        <div className="col-span-2">
-          <InputElem label="Title" placeholder="Title" />
+      <div className="my-6 grid md:grid-cols-3 gap-4 grid-cols-1">
+        <InputElem
+          label="Title"
+          placeholder="Title"
+          onChange={(e) => handleChange(e)}
+          name="title"
+          value={formData.title}
+        />
+        <InputElem
+          label="Quantity"
+          type="number"
+          placeholder="Quantity"
+          onChange={(e) => handleChange(e)}
+          name="quantity"
+          min={0}
+          value={formData.quantity}
+        />
+        <SelectElem
+          label="Category"
+          onChange={(e) => handleSelectChange(e, "category")}
+          name="category"
+        />
+        <div className="md:col-span-2">
+          <InputElem
+            label="Description"
+            placeholder=""
+            onChange={handleChange}
+            name="description"
+            value={formData.description}
+          />
         </div>
-        <InputElem label="Title" placeholder="Title" />
+        {/* <InputElem label="" placeholder="Title" /> */}
       </div>
     </div>
   );

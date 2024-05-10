@@ -64,9 +64,9 @@ const AllSupplies = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {suppliesArr.map((s) => {
+            {suppliesArr.map((s, i) => {
               return (
-                <TableRow>
+                <TableRow key={i}>
                   <TableCell>{s.title}</TableCell>
                   <TableCell>{s.category}</TableCell>
                   <TableCell>{s.quantity}</TableCell>
