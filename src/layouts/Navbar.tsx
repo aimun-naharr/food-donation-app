@@ -14,6 +14,7 @@ export default function Navbar() {
   ];
   const handleAuth = () => {
     navigate("/auth");
+    window.scrollTo(0, 0);
   };
   // TODO: Mobile nav
   return (

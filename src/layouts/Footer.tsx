@@ -25,6 +25,9 @@ export default function Footer() {
                 <li>
                   <a href="#">About Us</a>
                 </li>
+                <li>
+                  <a href="#">Terms and conditions</a>
+                </li>
               </ul>
             </div>
             <div className="mt-5">

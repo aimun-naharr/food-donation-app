@@ -1,4 +1,5 @@
 import Layout from "@/layouts/Layout";
+import AllSuppliesPosts from "@/pages/all-supplies";
 import Auth from "@/pages/auth";
 import Dashboard from "@/pages/dashboard";
 import AddNewSupplies from "@/pages/dashboard/add-new";
@@ -15,6 +16,11 @@ const routes = [
   {
     path: "/auth",
     element: <Auth />,
+    globalLayout: true,
+  },
+  {
+    path: "/all-items",
+    element: <AllSuppliesPosts />,
     globalLayout: true,
   },
   {

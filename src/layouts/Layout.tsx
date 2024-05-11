@@ -10,7 +10,7 @@ export default function Layout({ children }: TLayout) {
   return (
     <div className="relative">
       <Navbar />
-      <>{children}</>
+      <div className="min-h-screen">{children}</div>
       <Footer />
     </div>
   );
