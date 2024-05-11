@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 type TLayout = {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ export default function Layout({ children }: TLayout) {
     <div className="relative">
       <Navbar />
       <>{children}</>
-      <footer>footer</footer>
+      <Footer />
     </div>
   );
 }

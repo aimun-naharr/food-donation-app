@@ -10,14 +10,17 @@ const routes = [
   {
     path: "/",
     element: <Home />,
+    globalLayout: true,
   },
   {
     path: "/auth",
     element: <Auth />,
+    globalLayout: true,
   },
   {
     path: "/dashboard",
     element: <Dashboard />,
+    globalLayout: false,
     children: [
       {
         path: "all-supplies",
@@ -32,7 +35,9 @@ const routes = [
 ];
 
 const routerWithLayout = routes.map((route) => {
-  return { ...route, element: <Layout>{route.element}</Layout> };
+  if (route.globalLayout) {
+    return { ...route, element: <Layout>{route.element}</Layout> };
+  } else return { ...route };
 });
 const router = createBrowserRouter([...routerWithLayout]);
 

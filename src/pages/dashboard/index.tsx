@@ -1,3 +1,4 @@
+import Navbar from "@/layouts/Navbar";
 import { cn } from "@/lib/utils";
 import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
 import { LayoutPanelLeft } from "lucide-react";
@@ -29,7 +30,7 @@ const Sidebar = () => {
   // motion
   return (
     <div
-      className="md:w-[250px] h-screen"
+      className="md:w-[250px] h-[calc(h-screen-72px)]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -63,10 +64,13 @@ const Sidebar = () => {
 };
 export default function Dashboard() {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="md:p-4 p-1 w-full">
-        <Outlet />
+    <div>
+      <Navbar />
+      <div className="flex">
+        <Sidebar />
+        <div className="md:p-4 p-1 w-full h-full overflow-auto">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
