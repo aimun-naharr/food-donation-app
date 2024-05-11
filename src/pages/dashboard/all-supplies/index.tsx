@@ -7,6 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -16,10 +17,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { suppliesArr } from "@/lib/constants";
+import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
 import { Plus } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import { EditForm } from "./EditForm";
+import DeleteForm from "./DeleteForm";
 
 const AllSupplies = () => {
+  const { data, isLoading } = useGetAllSupplyPostsQuery("");
   const navigate = useNavigate();
   return (
     <div className="w-full">
@@ -64,16 +69,29 @@ const AllSupplies = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {suppliesArr.map((s, i) => {
-              return (
-                <TableRow key={i}>
-                  <TableCell>{s.title}</TableCell>
-                  <TableCell>{s.category}</TableCell>
-                  <TableCell>{s.quantity}</TableCell>
-                  <TableCell>buttons</TableCell>
-                </TableRow>
-              );
-            })}
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={4}>
+                  <p>loading</p>
+                </TableCell>
+              </TableRow>
+            ) : (
+              data?.data.map((s, i) => {
+                return (
+                  <TableRow key={s._id}>
+                    <TableCell>{s.name}</TableCell>
+                    <TableCell>{s.category}</TableCell>
+                    <TableCell className="">{s.quantity}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-4">
+                        <EditForm />
+                        <DeleteForm id={s._id} />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
           </TableBody>
         </Table>
       </div>

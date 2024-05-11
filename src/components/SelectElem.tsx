@@ -10,29 +10,34 @@ const SelectElem = ({
   label,
   placeholder,
   onChange,
+  options,
 }: {
   label: string;
   placeholder?: string;
   name?: string;
-
+  options: string[];
   onChange: (e: string) => void;
 }) => {
   return (
     <>
       <div>
-        <div className="mb-2">
+        <div className="mb-1">
           <label htmlFor="" className="text-xs font-semibold  ">
             {label}
           </label>
         </div>
         <Select onValueChange={onChange}>
-          <SelectTrigger className="w-full" onChange={(e) => onChange(e)}>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder={placeholder || label} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
+            {options.map((option) => {
+              return (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              );
+            })}
           </SelectContent>
         </Select>
       </div>

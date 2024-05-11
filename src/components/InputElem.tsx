@@ -17,7 +17,7 @@ const InputElem = ({
   return (
     <>
       <div>
-        <div className="mb-2">
+        <div className="mb-1">
           <label htmlFor="" className="text-xs font-semibold  ">
             {label}
           </label>

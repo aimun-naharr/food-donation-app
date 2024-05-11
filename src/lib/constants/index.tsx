@@ -37,3 +37,15 @@ export const suppliesArr = [
     quantity: "15 cans",
   },
 ];
+
+export const categoryOptions = [
+  "Grains",
+  "Proteins",
+  "Vegetables",
+  "Fruits",
+  "Dairy & Eggs",
+  "Bread & Cereals",
+  "Fats & Oils",
+  "Snacks",
+  "Condiments & Seasonings",
+];

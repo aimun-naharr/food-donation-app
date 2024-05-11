@@ -1,4 +1,5 @@
 import InputElem from "@/components/InputElem";
+import ButtonComp from "@/components/PrimaryButton";
 import SelectElem from "@/components/SelectElem";
 import {
   Breadcrumb,
@@ -8,24 +9,58 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import React, { useState } from "react";
+import { categoryOptions } from "@/lib/constants";
+import { useCreateSupplyPostMutation } from "@/redux/apiSlices/supply";
+import { Cross, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Camera } from "react-feather";
+import { toast } from "sonner";
 
 const initialFormData = {
-  title: "",
+  name: "",
   description: "",
   category: "",
   quantity: 0,
 };
 
 const AddNewSupplies = () => {
+  const [addPost, { isError, isLoading, isSuccess }] =
+    useCreateSupplyPostMutation();
   const [formData, setFormData] = useState(initialFormData);
-  console.log({ formData });
+  const imageRef = useRef<HTMLInputElement>(null);
+  const [img, setImg] = useState(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
   const handleSelectChange = (value: string, name: string) => {
     setFormData({ ...formData, [name]: value });
+  };
+
+  useEffect(() => {
+    setFormData(initialFormData);
+    setImg(null);
+  }, [isSuccess]);
+
+  const onImageChange = (e) => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImg(reader.result);
+      };
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (formData.name && formData.category && formData.quantity) {
+      await addPost({ ...formData, image: img }).then((res) => {
+        if (res.data.success) {
+          toast("Supply post created");
+        }
+      });
+    }
   };
   return (
     <div>
@@ -48,8 +83,9 @@ const AddNewSupplies = () => {
           label="Title"
           placeholder="Title"
           onChange={(e) => handleChange(e)}
-          name="title"
-          value={formData.title}
+          name="name"
+          value={formData.name}
+          required
         />
         <InputElem
           label="Quantity"
@@ -58,12 +94,14 @@ const AddNewSupplies = () => {
           onChange={(e) => handleChange(e)}
           name="quantity"
           min={0}
+          required
           value={formData.quantity}
         />
         <SelectElem
           label="Category"
           onChange={(e) => handleSelectChange(e, "category")}
           name="category"
+          options={categoryOptions}
         />
         <div className="md:col-span-2">
           <InputElem
@@ -75,6 +113,43 @@ const AddNewSupplies = () => {
           />
         </div>
         {/* <InputElem label="" placeholder="Title" /> */}
+        <div>
+          {img ? (
+            <div className="relative">
+              <button
+                onClick={() => setImg(null)}
+                className="absolute bg-red-50  size-10 flex items-center justify-center rounded-full shadow-2xl -left-4 -top-3 cursor-pointer shadow-primary group "
+              >
+                <X className="group-hover:rotate-12 transition-transform" />
+              </button>
+              <img
+                className="w-[300px] h-[180px] rounded object-contain"
+                src={img}
+                alt="previewImg"
+              />
+            </div>
+          ) : (
+            <div
+              onClick={() => imageRef?.current?.click()}
+              className="border border-dashed border-zinc-300 rounded hover:border-dotted w-full h-full flex items-center justify-center cursor-pointer gap-4"
+            >
+              {" "}
+              <Camera />
+              <div>Upload image</div>
+            </div>
+          )}
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={imageRef}
+            onChange={onImageChange}
+          />
+        </div>
+      </div>
+      <div>
+        <ButtonComp onClick={handleSubmit}>
+          {isLoading ? "Saving..." : "Save"}
+        </ButtonComp>
       </div>
     </div>
   );
