@@ -20,9 +20,19 @@ body {
   font-weight: 400;
 }
 
+.testimonial-container {
+  column-gap: 0;
+  padding: 0;
+  column-count: 2;
+}
+.testimonial-card {
+  break-inside: avoid;
+}
+
 @layer base {
   section {
     @apply my-20 md:my-28;
+    box-sizing: border-box;
   }
 }
 

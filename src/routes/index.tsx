@@ -5,6 +5,7 @@ import Dashboard from "@/pages/dashboard";
 import AddNewSupplies from "@/pages/dashboard/add-new";
 import AllSupplies from "@/pages/dashboard/all-supplies";
 import Home from "@/pages/home";
+import SingleItem from "@/pages/single-item";
 import { createBrowserRouter } from "react-router-dom";
 
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
   {
     path: "/all-items",
     element: <AllSuppliesPosts />,
+    globalLayout: true,
+  },
+  {
+    path: "/items/:id",
+    element: <SingleItem />,
     globalLayout: true,
   },
   {

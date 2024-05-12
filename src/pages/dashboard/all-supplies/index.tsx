@@ -22,6 +22,7 @@ import { Plus } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { EditForm } from "./EditForm";
 import DeleteForm from "./DeleteForm";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AllSupplies = () => {
   const { data, isLoading } = useGetAllSupplyPostsQuery("");
@@ -69,29 +70,47 @@ const AllSupplies = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={4}>
-                  <p>loading</p>
-                </TableCell>
-              </TableRow>
-            ) : (
-              data?.data.map((s, i) => {
-                return (
-                  <TableRow key={s._id}>
-                    <TableCell>{s.name}</TableCell>
-                    <TableCell>{s.category}</TableCell>
-                    <TableCell className="">{s.quantity}</TableCell>
-                    <TableCell>
-                      <div className="flex gap-4">
-                        <EditForm id={s._id} />
-                        <DeleteForm id={s._id} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            )}
+            {isLoading
+              ? Array(4)
+                  .fill(1)
+                  .map((s, i) => {
+                    return (
+                      <TableRow key={i}>
+                        <TableCell>
+                          <Skeleton className="h-[30px] w-[250px]" />
+                        </TableCell>
+                        <TableCell>
+                          {" "}
+                          <Skeleton className="h-[30px] w-[250px]" />
+                        </TableCell>
+                        <TableCell className="">
+                          {" "}
+                          <Skeleton className="h-[30px] w-[250px]" />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-4">
+                            <Skeleton className="h-[30px] w-[80px]" />
+                            <Skeleton className="h-[30px] w-[80px]" />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+              : data?.data.map((s, i) => {
+                  return (
+                    <TableRow key={s._id}>
+                      <TableCell>{s.name}</TableCell>
+                      <TableCell>{s.category}</TableCell>
+                      <TableCell className="">{s.quantity}</TableCell>
+                      <TableCell>
+                        <div className="flex gap-4">
+                          <EditForm id={s._id} />
+                          <DeleteForm id={s._id} />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </div>

@@ -20,6 +20,7 @@ const supplyApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `/items/${id}`,
       }),
+      providesTags: ["supply"],
     }),
     deleteSupply: builder.mutation({
       query: (id) => ({

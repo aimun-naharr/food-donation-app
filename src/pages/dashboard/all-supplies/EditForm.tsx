@@ -89,7 +89,9 @@ function ProfileForm({
   id,
   toggleDialog,
 }: React.ComponentProps<"form">) {
-  const { data, isLoading, isSuccess } = useGetOnePoductQuery(id);
+  const { data, isLoading, isSuccess } = useGetOnePoductQuery(id, {
+    refetchOnMountOrArgChange: true,
+  });
   const [updateSupply, { isLoading: updateLoading, isError }] =
     useUpdateSupplyMutation();
   const initialFormData = {
@@ -98,7 +100,6 @@ function ProfileForm({
     quantity: 0,
     category: "",
   };
-  console.log("isError", isError);
 
   const [formData, setFormData] = React.useState(initialFormData);
   const [img, setImg] = React.useState(null);
@@ -126,7 +127,6 @@ function ProfileForm({
   if (isLoading) {
     return <p>loading...</p>;
   }
-  console.log({ formData });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;

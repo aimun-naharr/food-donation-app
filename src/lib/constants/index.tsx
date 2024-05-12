@@ -37,6 +37,50 @@ export const suppliesArr = [
     quantity: "15 cans",
   },
 ];
+export const testimonialsArray = [
+  {
+    name: "John Doe",
+    testimonial:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: assets.Person2,
+  },
+  {
+    name: "Jane Smith",
+    testimonial:
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    image: assets.Person3,
+  },
+  {
+    name: "Mike Johnson",
+    testimonial:
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    image: assets.Person4,
+  },
+  {
+    name: "Emily Brown",
+    testimonial:
+      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    image: assets.Person5,
+  },
+  {
+    name: "Chris Williams",
+    testimonial:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    image: assets.Person6,
+  },
+  {
+    name: "Sarah Thompson",
+    testimonial:
+      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+    image: assets.Person7,
+  },
+  {
+    name: "David Lee",
+    testimonial:
+      "Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+    image: assets.Person2,
+  },
+];
 
 export const categoryOptions = [
   "Grains",

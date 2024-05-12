@@ -2,6 +2,7 @@ import React from "react";
 import TestimonialCard from "../TestimonialCard";
 import Container from "@/layouts/Container";
 import Marquee from "../Marquee";
+import { testimonialsArray } from "@/lib/constants";
 
 export default function TestimonialsSection() {
   return (
@@ -10,18 +11,11 @@ export default function TestimonialsSection() {
         <div>
           <h6 className="section_title">Testimonials</h6>
         </div>
-        <div className="flex my-10 justify-between gap-10 flex-wrap">
-          {/* <Marquee className="py-10 [--duration:20s]"> */}
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          {/* </Marquee> */}
-          {/* <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard /> */}
+        <div className="flex my-10 justify-between gap-10 flex-wrap items-center">
+          {/* <div className="testimonial-container"> */}
+          {testimonialsArray.map((t, i) => {
+            return <TestimonialCard key={i} {...t} />;
+          })}
         </div>
       </Container>
     </section>

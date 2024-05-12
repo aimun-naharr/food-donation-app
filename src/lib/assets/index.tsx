@@ -1,4 +1,10 @@
 import Person1 from "@/assets/person1.avif";
+import Person2 from "@/assets/person-2.jpeg";
+import Person3 from "@/assets/person-3.jpeg";
+import Person4 from "@/assets/person-4.jpeg";
+import Person5 from "@/assets/person-5.jpeg";
+import Person6 from "@/assets/person-6.jpeg";
+import Person7 from "@/assets/person-7.jpeg";
 import HeroImage from "@/assets/hero-image.avif";
 import HeroImage2 from "@/assets/hero-image2.avif";
 import piggy from "@/assets/piggy.avif";
@@ -21,4 +27,10 @@ export const assets = {
   education,
   clothes,
   momAndChild,
+  Person2,
+  Person3,
+  Person4,
+  Person5,
+  Person6,
+  Person7,
 };
