@@ -1,16 +1,15 @@
 import Container from "@/layouts/Container";
-import React from "react";
 import SupplyPostCard from "../SupplyPostCard";
 import { suppliesArr } from "@/lib/constants";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
 import SupplyCardLoader from "../SupplyCardLoader";
+import { TSupplyPost } from "@/types";
 
 export default function SuppliesSection() {
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllSupplyPostsQuery("");
-  console.log(data);
   return (
     <section className="">
       {/* <SupplyCardLoader /> */}
@@ -29,7 +28,7 @@ export default function SuppliesSection() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-4">
-            {data.data.map((s, i) => (
+            {data.data.map((s: TSupplyPost, i: number) => (
               <SupplyPostCard key={i} {...s} />
             ))}
           </div>

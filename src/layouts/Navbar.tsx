@@ -24,7 +24,7 @@ export default function Navbar() {
         <Logo />
         {/* nav items */}
         <div className="md:flex gap-6 items-center hidden text-sm">
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             return (
               <Link
                 to={item.href}

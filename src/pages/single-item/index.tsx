@@ -2,7 +2,7 @@ import ButtonComp from "@/components/PrimaryButton";
 import SingleItemPageSkeleton from "@/components/SingleItemPageSkeleton";
 import Container from "@/layouts/Container";
 import { useGetOnePoductQuery } from "@/redux/apiSlices/supply";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function SingleItem() {

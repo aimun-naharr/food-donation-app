@@ -3,7 +3,8 @@ import SupplyPostCard from "@/components/SupplyPostCard";
 import Container from "@/layouts/Container";
 import { suppliesArr } from "@/lib/constants";
 import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
-import React, { useEffect } from "react";
+import { TSupplyPost } from "@/types";
+import { useEffect } from "react";
 
 export default function AllSuppliesPosts() {
   const { data, isLoading } = useGetAllSupplyPostsQuery("");
@@ -24,7 +25,7 @@ export default function AllSuppliesPosts() {
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 ">
-                {data.data.map((s, i) => (
+                {data.data.map((s: TSupplyPost, i: number) => (
                   <SupplyPostCard key={i} {...s} />
                 ))}
               </div>

@@ -7,7 +7,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -16,13 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { suppliesArr } from "@/lib/constants";
 import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
 import { Plus } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { EditForm } from "./EditForm";
 import DeleteForm from "./DeleteForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TSupplyPost } from "@/types";
 
 const AllSupplies = () => {
   const { data, isLoading } = useGetAllSupplyPostsQuery("");
@@ -73,7 +72,7 @@ const AllSupplies = () => {
             {isLoading
               ? Array(4)
                   .fill(1)
-                  .map((s, i) => {
+                  .map((_, i) => {
                     return (
                       <TableRow key={i}>
                         <TableCell>
@@ -96,7 +95,7 @@ const AllSupplies = () => {
                       </TableRow>
                     );
                   })
-              : data?.data.map((s, i) => {
+              : data?.data.map((s: TSupplyPost) => {
                   return (
                     <TableRow key={s._id}>
                       <TableCell>{s.name}</TableCell>
@@ -104,8 +103,8 @@ const AllSupplies = () => {
                       <TableCell className="">{s.quantity}</TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <EditForm id={s._id} />
-                          <DeleteForm id={s._id} />
+                          <EditForm id={s._id ? s._id : ""} />
+                          <DeleteForm id={s._id ? s._id : ""} />
                         </div>
                       </TableCell>
                     </TableRow>

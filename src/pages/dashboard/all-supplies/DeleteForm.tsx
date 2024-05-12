@@ -9,13 +9,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { useDeleteSupplyMutation } from "@/redux/apiSlices/supply";
 import { toast } from "sonner";
 
 export default function DeleteForm({ id }: { id: string }) {
-  const [deletePost, { isLoading, isSuccess }] = useDeleteSupplyMutation();
+  const [deletePost, { isLoading }] = useDeleteSupplyMutation();
   const handleDelete = async () => {
     await deletePost(id).then((res) => {
       if (res.data.success) {

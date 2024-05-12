@@ -1,13 +1,7 @@
-import React, { useRef } from "react";
-import Person1 from "../assets/person1.avif";
-import { ArrowDown } from "react-feather";
+import { useRef } from "react";
+
 import { cn } from "@/lib/utils";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 type THeroHangingCardProp = {
   className: string;

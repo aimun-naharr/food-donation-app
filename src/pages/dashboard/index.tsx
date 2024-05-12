@@ -1,13 +1,10 @@
 import Navbar from "@/layouts/Navbar";
 import { cn } from "@/lib/utils";
-import { useGetAllSupplyPostsQuery } from "@/redux/apiSlices/supply";
 import { LayoutPanelLeft } from "lucide-react";
-import { useState } from "react";
 import { Plus, Table } from "react-feather";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-  const [hovered, setHovered] = useState(false);
   const { pathname } = useLocation();
 
   const navItems = [
@@ -29,11 +26,7 @@ const Sidebar = () => {
   ];
   // motion
   return (
-    <div
-      className="md:w-[250px] h-[calc(h-screen-72px)]"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="md:w-[250px] h-[calc(h-screen-72px)]">
       <ul className="flex flex-col gap-1 mt-1">
         {navItems.map((nav, i) => {
           return (

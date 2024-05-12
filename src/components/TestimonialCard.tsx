@@ -1,6 +1,3 @@
-import { assets } from "@/lib/assets";
-import React from "react";
-
 export default function TestimonialCard({
   name,
   testimonial,

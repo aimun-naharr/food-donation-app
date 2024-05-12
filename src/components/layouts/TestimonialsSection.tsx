@@ -1,7 +1,5 @@
-import React from "react";
 import TestimonialCard from "../TestimonialCard";
 import Container from "@/layouts/Container";
-import Marquee from "../Marquee";
 import { testimonialsArray } from "@/lib/constants";
 
 export default function TestimonialsSection() {

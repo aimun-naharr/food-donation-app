@@ -1,14 +1,6 @@
-import React from "react";
+import { TSupplyPost } from "@/types";
 import { ArrowRight } from "react-feather";
 import { useNavigate } from "react-router-dom";
-
-type TSupplyPost = {
-  image: string;
-  name: string;
-  category: string;
-  quantity: number;
-  _id: string;
-};
 
 export default function SupplyPostCard({
   image,
