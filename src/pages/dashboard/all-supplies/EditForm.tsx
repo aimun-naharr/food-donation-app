@@ -88,11 +88,15 @@ function ProfileForm({
   className,
   id,
   toggleDialog,
-}: React.ComponentProps<"form">) {
+}: {
+  className?: string;
+  id: string;
+  toggleDialog: () => void;
+}) {
   const { data, isLoading, isSuccess } = useGetOnePoductQuery(id, {
     refetchOnMountOrArgChange: true,
   });
-  const [updateSupply, { isLoading: updateLoading, isError }] =
+  const [updateSupply, { isLoading: updateLoading }] =
     useUpdateSupplyMutation();
   const initialFormData = {
     name: "",
@@ -102,19 +106,24 @@ function ProfileForm({
   };
 
   const [formData, setFormData] = React.useState(initialFormData);
-  const [img, setImg] = React.useState(null);
+  const [img, setImg] = React.useState<string | ArrayBuffer | null>(null);
   const imageRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     if (isSuccess && data?.success) {
-      const { name, image, description, category, quantity } = data?.data;
-      setFormData({ name, description, quantity, category });
-      setImg(image);
+      // const { name, image, description, category, quantity } = data?.data;
+      setFormData({
+        name: data?.data?.name,
+        description: data?.data?.description,
+        quantity: data.data.quantity,
+        category: data?.data?.category,
+      });
+      setImg(data?.data?.image);
     }
   }, [isSuccess]);
 
-  const onImageChange = (e) => {
-    if (e.target.files[0]) {
+  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target?.files && e.target.files[0]) {
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -136,7 +145,7 @@ function ProfileForm({
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSave = async (e) => {
+  const handleSave = async (e: React.MouseEvent) => {
     e.preventDefault();
     await updateSupply({ id, data: { ...formData, image: img } }).then(
       (res) => {
@@ -198,7 +207,7 @@ function ProfileForm({
               </button>
               <img
                 className="w-[300px] md:h-[150px] h-[100px] rounded object-contain"
-                src={img}
+                src={typeof img === "string" ? img : ""}
                 alt="previewImg"
               />
             </div>

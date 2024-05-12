@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { categoryOptions } from "@/lib/constants";
 import { useCreateSupplyPostMutation } from "@/redux/apiSlices/supply";
-import { Cross, X } from "lucide-react";
+import { X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Camera } from "react-feather";
 import { toast } from "sonner";
@@ -24,11 +24,10 @@ const initialFormData = {
 };
 
 const AddNewSupplies = () => {
-  const [addPost, { isError, isLoading, isSuccess }] =
-    useCreateSupplyPostMutation();
+  const [addPost, { isLoading, isSuccess }] = useCreateSupplyPostMutation();
   const [formData, setFormData] = useState(initialFormData);
   const imageRef = useRef<HTMLInputElement>(null);
-  const [img, setImg] = useState(null);
+  const [img, setImg] = useState<string | ArrayBuffer | null>(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -85,7 +84,6 @@ const AddNewSupplies = () => {
           onChange={(e) => handleChange(e)}
           name="name"
           value={formData.name}
-          required
         />
         <InputElem
           label="Quantity"
@@ -94,7 +92,6 @@ const AddNewSupplies = () => {
           onChange={(e) => handleChange(e)}
           name="quantity"
           min={0}
-          required
           value={formData.quantity}
         />
         <SelectElem
@@ -125,7 +122,7 @@ const AddNewSupplies = () => {
               </button>
               <img
                 className="w-[300px] h-[180px] rounded object-contain"
-                src={img}
+                src={typeof img === "string" ? img : ""}
                 alt="previewImg"
               />
             </div>

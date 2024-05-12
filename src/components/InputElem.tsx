@@ -13,6 +13,7 @@ const InputElem = ({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string | number;
+  min?: number;
 }) => {
   return (
     <>
