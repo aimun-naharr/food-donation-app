@@ -18,13 +18,21 @@ const supplyApi = baseApi.injectEndpoints({
     }),
     getOnePoduct: builder.query({
       query: (id) => ({
-        url: `products/${id}`,
+        url: `/items/${id}`,
       }),
     }),
     deleteSupply: builder.mutation({
       query: (id) => ({
         method: "DELETE",
         url: `items/${id}`,
+      }),
+      invalidatesTags: ["supply"],
+    }),
+    updateSupply: builder.mutation({
+      query: ({ id, data }) => ({
+        method: "PUT",
+        url: `items/${id}`,
+        body: data,
       }),
       invalidatesTags: ["supply"],
     }),
@@ -35,4 +43,6 @@ export const {
   useCreateSupplyPostMutation,
   useGetAllSupplyPostsQuery,
   useDeleteSupplyMutation,
+  useGetOnePoductQuery,
+  useUpdateSupplyMutation,
 } = supplyApi;

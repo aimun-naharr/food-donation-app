@@ -84,7 +84,7 @@ const AllSupplies = () => {
                     <TableCell className="">{s.quantity}</TableCell>
                     <TableCell>
                       <div className="flex gap-4">
-                        <EditForm />
+                        <EditForm id={s._id} />
                         <DeleteForm id={s._id} />
                       </div>
                     </TableCell>

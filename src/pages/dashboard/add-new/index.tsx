@@ -102,6 +102,7 @@ const AddNewSupplies = () => {
           onChange={(e) => handleSelectChange(e, "category")}
           name="category"
           options={categoryOptions}
+          value={formData.category}
         />
         <div className="md:col-span-2">
           <InputElem

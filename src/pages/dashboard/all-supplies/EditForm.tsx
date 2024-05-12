@@ -25,10 +25,18 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import SelectElem from "@/components/SelectElem";
 import { categoryOptions } from "@/lib/constants";
 import { Camera, X } from "react-feather";
+import {
+  useGetOnePoductQuery,
+  useUpdateSupplyMutation,
+} from "@/redux/apiSlices/supply";
+import { toast } from "sonner";
 
-export function EditForm() {
+export function EditForm({ id }: { id: string }) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const handledialogOpenChange = () => {
+    setOpen(!open);
+  };
 
   if (isDesktop) {
     return (
@@ -43,7 +51,7 @@ export function EditForm() {
               Make changes to your profile here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
-          <ProfileForm />
+          <ProfileForm id={id} toggleDialog={handledialogOpenChange} />
         </DialogContent>
       </Dialog>
     );
@@ -61,7 +69,11 @@ export function EditForm() {
             Make changes to your profile here. Click save when you're done.
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className="px-4" />
+        <ProfileForm
+          className="px-4"
+          id={id}
+          toggleDialog={handledialogOpenChange}
+        />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -72,9 +84,34 @@ export function EditForm() {
   );
 }
 
-function ProfileForm({ className }: React.ComponentProps<"form">) {
+function ProfileForm({
+  className,
+  id,
+  toggleDialog,
+}: React.ComponentProps<"form">) {
+  const { data, isLoading, isSuccess } = useGetOnePoductQuery(id);
+  const [updateSupply, { isLoading: updateLoading, isError }] =
+    useUpdateSupplyMutation();
+  const initialFormData = {
+    name: "",
+    description: "",
+    quantity: 0,
+    category: "",
+  };
+  console.log("isError", isError);
+
+  const [formData, setFormData] = React.useState(initialFormData);
   const [img, setImg] = React.useState(null);
   const imageRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (isSuccess && data?.success) {
+      const { name, image, description, category, quantity } = data?.data;
+      setFormData({ name, description, quantity, category });
+      setImg(image);
+    }
+  }, [isSuccess]);
+
   const onImageChange = (e) => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
@@ -86,6 +123,30 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     }
   };
 
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+  console.log({ formData });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+  const handleSelectChange = (value: string, name: string) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    await updateSupply({ id, data: { ...formData, image: img } }).then(
+      (res) => {
+        if (res.data.success) {
+          toast("Supply updated");
+          toggleDialog();
+        }
+      }
+    );
+  };
   return (
     <form
       className={cn(
@@ -95,20 +156,35 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     >
       <div>
         <Label htmlFor="name">Title</Label>
-        <Input type="text" id="name" defaultValue="" />
+        <Input
+          type="text"
+          id="name"
+          value={formData?.name}
+          onChange={handleChange}
+        />
       </div>
       <div>
         <Label htmlFor="quantity">Quantity</Label>
-        <Input type="number" id="quantity" defaultValue="" />
+        <Input
+          type="number"
+          id="quantity"
+          value={formData?.quantity}
+          onChange={handleChange}
+        />
       </div>
       <SelectElem
         label="Category"
-        onChange={() => {}}
         options={categoryOptions}
+        value={formData?.category}
+        onChange={(e) => handleSelectChange(e, "category")}
       />
       <div>
         <Label htmlFor="description">Description</Label>
-        <Input id="description" defaultValue="" />
+        <Input
+          id="description"
+          value={formData?.description}
+          onChange={handleChange}
+        />
       </div>
       <div className="col-span-2 h-[150px]">
         <div className="h-[150px]">
@@ -145,8 +221,14 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
         </div>
       </div>
       <div className="col-span-2">
-        <Button type="submit" className="w-full" variant={"secondary"}>
-          Save changes
+        <Button
+          type="submit"
+          className="w-full"
+          variant={"secondary"}
+          onClick={handleSave}
+          disabled={updateLoading}
+        >
+          {updateLoading ? "Saving changes..." : "Save Changes"}
         </Button>
       </div>
     </form>

@@ -4,7 +4,9 @@ import type { Pokemon } from "./types";
 // Define a service using a base URL and expected endpoints
 const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://food-donation-app-server.onrender.com/api/v1",
+  }),
   tagTypes: ["supply"],
   endpoints: (builder) => ({}),
 });

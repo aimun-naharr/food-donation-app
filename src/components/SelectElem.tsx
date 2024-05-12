@@ -11,7 +11,9 @@ const SelectElem = ({
   placeholder,
   onChange,
   options,
+  value,
 }: {
+  value?: string;
   label: string;
   placeholder?: string;
   name?: string;
@@ -26,7 +28,7 @@ const SelectElem = ({
             {label}
           </label>
         </div>
-        <Select onValueChange={onChange}>
+        <Select onValueChange={onChange} value={value}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder={placeholder || label} />
           </SelectTrigger>
