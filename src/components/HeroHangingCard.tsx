@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 type THeroHangingCardProp = {
   className: string;
@@ -25,6 +25,8 @@ const Tick = () => {
     </svg>
   );
 };
+const ROTATION_RANGE = 20;
+const HALF_ROTATION_RANGE = 20 / 2;
 export default function HeroHangingCard({
   className,
   imageUrl,
@@ -32,50 +34,56 @@ export default function HeroHangingCard({
   iconBgClass,
 }: THeroHangingCardProp) {
   const ref = useRef<HTMLDivElement>(null);
-  // const ROTATION_RANGE = 10;
-  // const HALF_ROTATION_RANGE = 10 / 2;
-
-  // const x = useMotionValue(0);
-  // const y = useMotionValue(0);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
   // const xSpring = useSpring(x);
   // const ySpring = useSpring(y);
 
-  // const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
+  const transform = useMotionTemplate`rotateX(${x}deg) rotateY(${y}deg)`;
 
-  // const handleMouseMove = (e: React.MouseEvent) => {
-  //   if (!ref.current) return [0, 0];
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return [0, 0];
 
-  //   const rect = ref.current.getBoundingClientRect();
+    const rect = ref.current.getBoundingClientRect();
 
-  //   const width = rect.width;
-  //   const height = rect.height;
+    const width = rect.width;
+    const height = rect.height;
 
-  //   const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
-  //   const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
+    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
+    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
 
-  //   const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
-  //   const rY = mouseX / width - HALF_ROTATION_RANGE;
+    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
+    const rY = mouseX / width - HALF_ROTATION_RANGE;
 
-  //   x.set(rX);
-  //   y.set(rY);
-  // };
+    x.set(rX);
+    y.set(rY);
+  };
 
-  // const handleMouseLeave = () => {
-  //   x.set(0);
-  //   y.set(0);
-  // };
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.div
       ref={ref}
-      // onMouseMove={handleMouseMove}
-      // onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: 3,
+          duration: 2,
+        },
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={cn(
         "w-[150px] md:w-[250px] bg-primary-foreground  absolute  rounded-md shadow-2xl  ",
         className
       )}
-      // style={{ transform }}
+      style={{ transform }}
     >
       <div className="relative flex flex-col gap-6 md:gap-8 px-2 py-4 md:px-4 md:py-6">
         <div className="w-full rounded-md aspect-square overflow-hidden ">

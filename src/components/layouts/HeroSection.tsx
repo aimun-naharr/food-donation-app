@@ -1,9 +1,10 @@
 import { assets } from "@/lib/assets";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Container from "../../layouts/Container";
 import HeroHangingCard from "../HeroHangingCard";
-import { Separator } from "../ui/separator";
-import { cn } from "@/lib/utils";
 import NumberTicker from "../NumberTicker";
+import { Separator } from "../ui/separator";
 
 type TCountCard = {
   count: number;
@@ -46,22 +47,71 @@ export default function HeroSection() {
           </div>
           {/* hero descriptions */}
           <div className="flex_between justify-center relative ">
-            <h1 className="hero_title">
-              Small Effort make big <span className="text-primary">Change</span>
-            </h1>
-            <p className="max-w-[550px] md:text-sm text-xs leading-relaxed md:text-right ">
+            <motion.h1
+              initial={{ x: -20, opacity: 0 }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  duration: 2,
+                },
+              }}
+              className="hero_title"
+            >
+              Small Effort make big{" "}
+              <motion.span
+                initial={{ letterSpacing: "8px" }}
+                animate={{
+                  letterSpacing: "0",
+                  transition: {
+                    duration: 2,
+                    type: "spring",
+                    delay: 2,
+                  },
+                }}
+                className="text-primary"
+              >
+                Change
+              </motion.span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                // y: 0,
+                transition: {
+                  duration: 2,
+                  delay: 2.2,
+                  type: "spring",
+                },
+              }}
+              className="max-w-[550px] md:text-sm text-xs leading-relaxed md:text-right "
+            >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quo
               impedit possimus esse voluptatem ut laboriosam magnam placeat
               praesentium doloribus?
-            </p>
+            </motion.p>
           </div>
 
           {/* hero image */}
-          <div className="md:w-4/5 w-full my-24 md:my-0 md:mt-12 relative aspect-[10/12] sm:aspect-[16/8]">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 2,
+                delay: 2.7,
+                type: "spring",
+              },
+            }}
+            className="md:w-4/5 w-full my-24 md:my-0 md:mt-12 relative aspect-[10/12] sm:aspect-[16/8]"
+          >
             <img
               src={assets.HeroImage2}
               alt=""
-              className="object-cover h-full w-full "
+              className="object-cover h-full w-full rounded"
             />
 
             <HeroHangingCard
@@ -75,7 +125,7 @@ export default function HeroSection() {
               imageUrl={assets.piggy}
               linkText="Quick fundraise"
             />
-          </div>
+          </motion.div>
           <div className="w-full flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-10 py-8">
             <CountCard
               count={12}
